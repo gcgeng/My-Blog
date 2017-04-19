@@ -1,0 +1,1002 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="图论,数据结构,生成树,lct," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Brief Description
+您有一个无向带权图，您需要支持两种操作。 1. 询问两个点之间的最大权最小路径。 2. 删除一条边。
+Algorithm Design
+我们首先提出一个猜想：最优路径一定在原图的一个最小生成森林上，证明如下： 假设最优路径有\(\phi\)条边不再最小生成森林上，我们考察其中的一条边，根据定义，生成森林中一定有一条路径链接这条边的顶点且权值和小于这条边，那么我们">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[bzoj2594][Wc2006]水管局长数据加强版——lct+离线">
+<meta property="og:url" content="http://mrmorning.github.io/2017/03/10/bzoj2594-Wc2006-水管局长数据加强版——lct-离线/index.html">
+<meta property="og:site_name" content="Konjac's Blog">
+<meta property="og:description" content="Brief Description
+您有一个无向带权图，您需要支持两种操作。 1. 询问两个点之间的最大权最小路径。 2. 删除一条边。
+Algorithm Design
+我们首先提出一个猜想：最优路径一定在原图的一个最小生成森林上，证明如下： 假设最优路径有\(\phi\)条边不再最小生成森林上，我们考察其中的一条边，根据定义，生成森林中一定有一条路径链接这条边的顶点且权值和小于这条边，那么我们">
+<meta property="og:updated_time" content="2017-03-27T06:20:24.437Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[bzoj2594][Wc2006]水管局长数据加强版——lct+离线">
+<meta name="twitter:description" content="Brief Description
+您有一个无向带权图，您需要支持两种操作。 1. 询问两个点之间的最大权最小路径。 2. 删除一条边。
+Algorithm Design
+我们首先提出一个猜想：最优路径一定在原图的一个最小生成森林上，证明如下： 假设最优路径有\(\phi\)条边不再最小生成森林上，我们考察其中的一条边，根据定义，生成森林中一定有一条路径链接这条边的顶点且权值和小于这条边，那么我们">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mrmorning.github.io/2017/03/10/bzoj2594-Wc2006-水管局长数据加强版——lct-离线/"/>
+
+
+
+
+
+  <title> [bzoj2594][Wc2006]水管局长数据加强版——lct+离线 | Konjac's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Konjac's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">+1s</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tasks">
+          <a href="/tasks" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tasks"></i> <br />
+            
+            任务
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-template">
+          <a href="/template" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-bomb"></i> <br />
+            
+            模板
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mrmorning.github.io/2017/03/10/bzoj2594-Wc2006-水管局长数据加强版——lct-离线/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Geng Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/8966584?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Konjac's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                [bzoj2594][Wc2006]水管局长数据加强版——lct+离线
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-10T10:51:00+08:00">
+                2017-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="brief-description">Brief Description</h1>
+<p>您有一个无向带权图，您需要支持两种操作。 1. 询问两个点之间的最大权最小路径。 2. 删除一条边。</p>
+<h1 id="algorithm-design">Algorithm Design</h1>
+<p>我们首先提出一个猜想：最优路径一定在原图的一个最小生成森林上，证明如下： 假设最优路径有<span class="math inline">\(\phi\)</span>条边不再最小生成森林上，我们考察其中的一条边，根据定义，生成森林中一定有一条路径链接这条边的顶点且权值和小于这条边，那么我们如果使用这条路径代替这条边，<span class="math inline">\(\phi\)</span>会减小而最大权不会增加，所以根据反证法我们就可以知道这个结论的正确性。 有了这个引理之后我们可以把原题转化为维护一个最小生成森林，这显然可以使用lct维护。 考虑细节。因为lct不是太支持删一条边，所以我们离线地倒过来做。 另外我们需要记录每条边是否被删。我开始使用了map，然而不知道为什么一直RE。后来改用二分查找就好了。所以—— ## <del>抵制STL从我做起！（逃</del>#</p>
+<h1 id="code">Code</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxv = <span class="number">1500005</span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>;</div><div class="line">  <span class="keyword">char</span> ch = getchar();</div><div class="line">  <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(ch)) &#123;</div><div class="line">    <span class="keyword">if</span> (ch == <span class="string">'-'</span>)</div><div class="line">      f = <span class="number">-1</span>;</div><div class="line">    ch = getchar();</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">while</span> (<span class="built_in">isdigit</span>(ch)) &#123;</div><div class="line">    x = x * <span class="number">10</span> + ch - <span class="string">'0'</span>;</div><div class="line">    ch = getchar();</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> x * f;</div><div class="line">&#125;</div><div class="line"><span class="keyword">struct</span> data &#123;</div><div class="line">  <span class="keyword">int</span> from, to, dat, br, id;</div><div class="line">  data(<span class="keyword">int</span> x = <span class="number">0</span>, <span class="keyword">int</span> y = <span class="number">0</span>, <span class="keyword">int</span> z = <span class="number">0</span>, <span class="keyword">int</span> i = <span class="number">0</span>, <span class="keyword">int</span> j = <span class="number">0</span>)</div><div class="line">      : from(x), to(y), dat(z), br(i), id(j) &#123;&#125;</div><div class="line">  <span class="keyword">bool</span> <span class="keyword">operator</span>&lt;(<span class="keyword">const</span> data b) <span class="keyword">const</span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>-&gt;from &lt; b.from || ((<span class="keyword">this</span>-&gt;from == b.from) &amp;&amp; (<span class="keyword">this</span>-&gt;to &lt; b.to));</div><div class="line">  &#125;</div><div class="line">&#125; a[<span class="number">1000005</span>];</div><div class="line"><span class="keyword">struct</span> req &#123;</div><div class="line">  <span class="keyword">int</span> opt, x, y, id, ans;</div><div class="line">  req(<span class="keyword">int</span> x = <span class="number">0</span>, <span class="keyword">int</span> y = <span class="number">0</span>, <span class="keyword">int</span> z = <span class="number">0</span>, <span class="keyword">int</span> k = <span class="number">0</span>, <span class="keyword">int</span> fuck = <span class="number">0</span>) &#123;</div><div class="line">    <span class="keyword">this</span>-&gt;opt = x;</div><div class="line">    <span class="keyword">this</span>-&gt;x = y;</div><div class="line">    <span class="keyword">this</span>-&gt;y = z;</div><div class="line">    <span class="keyword">this</span>-&gt;id = k;</div><div class="line">    <span class="keyword">this</span>-&gt;ans = fuck;</div><div class="line">  &#125;</div><div class="line">&#125; q[<span class="number">100005</span>];</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(data a, data b)</span> </span>&#123; <span class="keyword">return</span> a.dat &lt; b.dat; &#125;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp2</span><span class="params">(data a, data b)</span> </span>&#123; <span class="keyword">return</span> a.id &lt; b.id; &#125;</div><div class="line"><span class="keyword">int</span> n, m, qaq, f[maxv], max[maxv], val[maxv], tot, maxnum[maxv];</div><div class="line"><span class="keyword">int</span> fa[maxv], ch[maxv][<span class="number">2</span>];</div><div class="line"><span class="keyword">bool</span> rev[maxv];</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">bisearch</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> l = <span class="number">1</span>, r = m;</div><div class="line">  <span class="keyword">while</span> (l &lt;= r) &#123;</div><div class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span> (a[mid].from &lt; u || (a[mid].from == u &amp;&amp; a[mid].to &lt; v))</div><div class="line">      l = mid + <span class="number">1</span>;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (a[mid].from == u &amp;&amp; a[mid].to == v)</div><div class="line">      <span class="keyword">return</span> mid;</div><div class="line">    <span class="keyword">else</span></div><div class="line">      r = mid - <span class="number">1</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isroot</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> ch[fa[x]][<span class="number">0</span>] != x &amp;&amp; ch[fa[x]][<span class="number">1</span>] != x; &#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</div><div class="line">  <span class="keyword">if</span> (rev[k]) &#123;</div><div class="line">    rev[k] ^= <span class="number">1</span>;</div><div class="line">    rev[ch[k][<span class="number">0</span>]] ^= <span class="number">1</span>;</div><div class="line">    rev[ch[k][<span class="number">1</span>]] ^= <span class="number">1</span>;</div><div class="line">    <span class="built_in">std</span>::swap(ch[k][<span class="number">0</span>], ch[k][<span class="number">1</span>]);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">  maxnum[x] = x;</div><div class="line">  <span class="keyword">int</span> l = maxnum[ch[x][<span class="number">0</span>]], r = maxnum[ch[x][<span class="number">1</span>]];</div><div class="line">  <span class="keyword">if</span> (val[l] &gt; val[maxnum[x]])</div><div class="line">    maxnum[x] = l;</div><div class="line">  <span class="keyword">if</span> (val[r] &gt; val[maxnum[x]])</div><div class="line">    maxnum[x] = r;</div><div class="line">  max[x] = val[maxnum[x]];</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">zig</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> y = fa[x], z = fa[y], l = (ch[y][<span class="number">1</span>] == x), r = l ^ <span class="number">1</span>;</div><div class="line">  <span class="keyword">if</span> (!isroot(y))</div><div class="line">    ch[z][ch[z][<span class="number">1</span>] == y] = x;</div><div class="line">  fa[ch[y][l] = ch[x][r]] = y;</div><div class="line">  fa[ch[x][r] = y] = x;</div><div class="line">  fa[x] = z;</div><div class="line">  update(y);</div><div class="line">  update(x);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">splay</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">  <span class="keyword">int</span> s[maxv], top = <span class="number">0</span>;</div><div class="line">  s[++top] = x;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = x; !isroot(i); i = fa[i])</div><div class="line">    s[++top] = fa[i];</div><div class="line">  <span class="keyword">while</span> (top)</div><div class="line">    pushdown(s[top--]);</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> y; !isroot(x); zig(x)) &#123;</div><div class="line">    <span class="keyword">if</span> (!isroot(y = fa[x])) &#123;</div><div class="line">      zig((ch[fa[y]][<span class="number">0</span>] == y) == (ch[y][<span class="number">0</span>] == x) ? y : x);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  update(x);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">access</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> t = <span class="number">0</span>; x; t = x, x = fa[x]) &#123;</div><div class="line">    splay(x);</div><div class="line">    ch[x][<span class="number">1</span>] = t;</div><div class="line">    update(x);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">makeroot</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</div><div class="line">  access(x);</div><div class="line">  splay(x);</div><div class="line">  rev[x] ^= <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">split</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">  makeroot(y);</div><div class="line">  access(x);</div><div class="line">  splay(x);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">link</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">  makeroot(x);</div><div class="line">  fa[x] = y;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">cut</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">  makeroot(x);</div><div class="line">  access(y);</div><div class="line">  splay(y);</div><div class="line">  ch[y][<span class="number">0</span>] = fa[x] = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="built_in">memset</span>(val, <span class="number">0</span>, <span class="keyword">sizeof</span>(val));</div><div class="line">  n = read();</div><div class="line">  m = read();</div><div class="line">  qaq = read();</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</div><div class="line">    f[i] = i;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">    <span class="keyword">int</span> x = read(), y = read(), z = read();</div><div class="line">    <span class="keyword">if</span> (x &gt; y)</div><div class="line">      <span class="built_in">std</span>::swap(x, y);</div><div class="line">    a[i] = data(x, y, z);</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">std</span>::sort(a + <span class="number">1</span>, a + <span class="number">1</span> + m, cmp);</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">    a[i].id = i;</div><div class="line">    val[n + i] = a[i].dat;</div><div class="line">    maxnum[n + i] = n + i;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">std</span>::sort(a + <span class="number">1</span>, a + <span class="number">1</span> + m);</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= qaq; i++) &#123;</div><div class="line">    <span class="keyword">int</span> x = read(), y = read(), z = read();</div><div class="line">    q[i] = req(x, y, z);</div><div class="line">    <span class="keyword">if</span> (x == <span class="number">2</span>) &#123;</div><div class="line">      <span class="keyword">if</span> (q[i].x &gt; q[i].y)</div><div class="line">        <span class="built_in">std</span>::swap(q[i].x, q[i].y);</div><div class="line">      <span class="keyword">int</span> t = bisearch(q[i].x, q[i].y);</div><div class="line">      a[t].br = <span class="number">1</span>;</div><div class="line">      q[i].id = a[t].id;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> f[x] == x ? x : f[x] = find(f[x]); &#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">kruskal</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="built_in">std</span>::sort(a + <span class="number">1</span>, a + m + <span class="number">1</span>, cmp2);</div><div class="line">  tot = <span class="number">0</span>;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (!a[i].br) &#123;</div><div class="line">      <span class="keyword">int</span> u = a[i].from, v = a[i].to, x = find(u), y = find(v);</div><div class="line">      <span class="keyword">if</span> (x != y) &#123;</div><div class="line">        f[x] = y;</div><div class="line">        link(u, i + n);</div><div class="line">        link(v, i + n);</div><div class="line">        tot++;</div><div class="line">        <span class="keyword">if</span> (tot == n - <span class="number">1</span>)</div><div class="line">          <span class="keyword">break</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = qaq; i &gt;= <span class="number">1</span>; i--) &#123;</div><div class="line">    <span class="keyword">int</span> op = q[i].opt, x = q[i].x, y = q[i].y;</div><div class="line">    <span class="keyword">if</span> (op == <span class="number">1</span>) &#123;</div><div class="line">      split(x, y);</div><div class="line">      q[i].ans = val[maxnum[x]];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (op == <span class="number">2</span>) &#123;</div><div class="line">      <span class="keyword">int</span> k = q[i].id;</div><div class="line">      split(x, y);</div><div class="line">      <span class="keyword">int</span> t = maxnum[x];</div><div class="line">      <span class="keyword">if</span> (a[k].dat &lt; val[t]) &#123;</div><div class="line">        cut(a[t - n].from, t);</div><div class="line">        cut(a[t - n].to, t);</div><div class="line">        link(x, k + n);</div><div class="line">        link(y, k + n);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= qaq; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (q[i].opt == <span class="number">1</span>)</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, q[i].ans);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></div><div class="line">  freopen(<span class="string">"input"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">  init();</div><div class="line">  kruskal();</div><div class="line">  solve();</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/图论/" rel="tag"># 图论</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/生成树/" rel="tag"># 生成树</a>
+          
+            <a href="/tags/lct/" rel="tag"># lct</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/10/bzoj2631-tree——lct/" rel="next" title="[bzoj2631]tree——lct">
+                <i class="fa fa-chevron-left"></i> [bzoj2631]tree——lct
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/10/bzoj4034-HAOI2015-树上操作——树状数组-dfs序/" rel="prev" title="[bzoj4034][HAOI2015]树上操作——树状数组+dfs序">
+                [bzoj4034][HAOI2015]树上操作——树状数组+dfs序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzk0Ni80NTIz"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/8966584?v=3&s=460"
+               alt="Geng Chen" />
+          <p class="site-author-name" itemprop="name">Geng Chen</p>
+           
+              <p class="site-description motion-element" itemprop="description">problems, notes and solutions</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">174</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">95</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/MrMorning" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/geng-chen-51/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-wheelchair"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2-SAT/">2-SAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AC自动机/">AC自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BSGS/">BSGS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDQ分治/">CDQ分治</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP/">KMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manacher/">Manacher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTT/">NTT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Polya定理/">Polya定理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prufer编码/">Prufer编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Trie/">Trie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs序列/">dfs序列</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lca/">lca</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lct/">lct</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spfa/">spfa</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/splay/">splay</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上下界网络流/">上下界网络流</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主席树/">主席树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱搞/">乱搞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分/">二分</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分图/">二分图</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代价提前计算/">代价提前计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/倍增/">倍增</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分块/">分块</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分层图/">分层图</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分数规划/">分数规划</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态点分治/">动态点分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单调栈/">单调栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博弈论/">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原根/">原根</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图论/">图论</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式/">多项式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/好题/">好题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典序/">字典序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串哈希/">字符串哈希</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容斥原理/">容斥原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平面图/">平面图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并查集/">并查集</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广义后缀自动机/">广义后缀自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强连通分量/">强连通分量</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拆点/">拆点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/括号序列/">括号序列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/摸鱼/">摸鱼</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数位DP/">数位DP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学知识/">数学知识</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数论/">数论</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/斜率优化/">斜率优化</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最大流/">最大流</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最小割/">最小割</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/权值线段树/">权值线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/李超线段树/">李超线段树</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树上倍增/">树上倍增</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树套树/">树套树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形dp/">树形dp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型转化/">模型转化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/欧拉函数/">欧拉函数</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点分治/">点分治</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/特殊数列/">特殊数列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状压DP/">状压DP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生成函数/">生成函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生成树/">生成树</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生成树计数/">生成树计数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/矩阵乘法/">矩阵乘法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/矩阵树定理/">矩阵树定理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散对数/">离散对数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线处理/">离线处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性规划/">线性规划</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结论题/">结论题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络流/">网络流</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/莫队算法/">莫队算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/蒟蒻/">蒟蒻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负环/">负环</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心/">贪心</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/费用流/">费用流</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/退流/">退流</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递归/">递归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高斯消元/">高斯消元</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高精度/">高精度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/默比乌斯反演/">默比乌斯反演</a><span class="tag-list-count">2</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              无限ym的神犇们Orz
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/candy99" title="Candy?" target="_blank">Candy?</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://worldframe.top" title="冯硕" target="_blank">冯硕</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/orzgeotcbrl" title="orzGEOTCBRL" target="_blank">orzGEOTCBRL</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/lidaxin" title="hahalidaxin" target="_blank">hahalidaxin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/y-clever/" title="SDOI最强-IOI AK爷-rqy" target="_blank">SDOI最强-IOI AK爷-rqy</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sforest.in/" title="约修亚_RK" target="_blank">约修亚_RK</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://mby.pw/" title="mby" target="_blank">mby</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/huibixiaoxing/" title="嘒彼小星" target="_blank">嘒彼小星</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zhenghaotian" title="zht" target="_blank">zht</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#brief-description"><span class="nav-number">1.</span> <span class="nav-text">Brief Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#algorithm-design"><span class="nav-number">2.</span> <span class="nav-text">Algorithm Design</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code"><span class="nav-number">3.</span> <span class="nav-text">Code</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+          </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Geng Chen</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1231 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="网络流24题是一套经典的网络流题目, 来自1.本题解参考了教材的官方答疑2, 和几位神犇orz的博客345.
+1. 飞行员配对方案问题
+
+最大流, 二分图最大匹配
+
+裸的二分图最大匹配.
+2. 太空飞行计划问题
+
+最小割
+有一些实验, 实验需要一些仪器, 购置仪器的费用为\(c_k\), 实验做出来可以获得\(p_k\)美元. 选择购置哪些仪器使得
+
+\[\max \sum p_k - \sum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性规划与网络流24题解题报告">
+<meta property="og:url" content="http://mrmorning.github.io/2017/03/23/线性规划与网络流24题解题报告/index.html">
+<meta property="og:site_name" content="Konjac's Blog">
+<meta property="og:description" content="网络流24题是一套经典的网络流题目, 来自1.本题解参考了教材的官方答疑2, 和几位神犇orz的博客345.
+1. 飞行员配对方案问题
+
+最大流, 二分图最大匹配
+
+裸的二分图最大匹配.
+2. 太空飞行计划问题
+
+最小割
+有一些实验, 实验需要一些仪器, 购置仪器的费用为\(c_k\), 实验做出来可以获得\(p_k\)美元. 选择购置哪些仪器使得
+
+\[\max \sum p_k - \sum">
+<meta property="og:updated_time" content="2017-03-27T00:40:11.964Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线性规划与网络流24题解题报告">
+<meta name="twitter:description" content="网络流24题是一套经典的网络流题目, 来自1.本题解参考了教材的官方答疑2, 和几位神犇orz的博客345.
+1. 飞行员配对方案问题
+
+最大流, 二分图最大匹配
+
+裸的二分图最大匹配.
+2. 太空飞行计划问题
+
+最小割
+有一些实验, 实验需要一些仪器, 购置仪器的费用为\(c_k\), 实验做出来可以获得\(p_k\)美元. 选择购置哪些仪器使得
+
+\[\max \sum p_k - \sum">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://mrmorning.github.io/2017/03/23/线性规划与网络流24题解题报告/"/>
+
+
+
+
+
+  <title> 线性规划与网络流24题解题报告 | Konjac's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Konjac's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">+1s</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tasks">
+          <a href="/tasks" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tasks"></i> <br />
+            
+            任务
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-template">
+          <a href="/template" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-bomb"></i> <br />
+            
+            模板
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://mrmorning.github.io/2017/03/23/线性规划与网络流24题解题报告/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Geng Chen">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/8966584?v=3&s=460">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Konjac's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                线性规划与网络流24题解题报告
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-23T15:47:00+08:00">
+                2017-03-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>网络流24题是一套经典的网络流题目, 来自<计算机算法设计与分析, 王晓东=""><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.本题解参考了教材的官方答疑<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>, 和几位神犇orz的博客<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a><a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>.</计算机算法设计与分析,></p>
+<h2 id="飞行员配对方案问题">1. 飞行员配对方案问题</h2>
+<ul>
+<li>最大流, 二分图最大匹配</li>
+</ul>
+<p>裸的二分图最大匹配.</p>
+<h2 id="太空飞行计划问题">2. 太空飞行计划问题</h2>
+<ul>
+<li><p>最小割</p></li>
+<li><p>有一些实验, 实验需要一些仪器, 购置仪器的费用为<span class="math inline">\(c_k\)</span>, 实验做出来可以获得<span class="math inline">\(p_k\)</span>美元. 选择购置哪些仪器使得</p></li>
+</ul>
+<p><span class="math display">\[\max \sum p_k - \sum c_k\]</span></p>
+<ul>
+<li>显然这个题目是一个决策每个方案是否选择的问题, 可以转化成最小割模型, 我们由<span class="math inline">\(s\)</span>向每个仪器连一条容量为<span class="math inline">\(c_k\)</span>的边, 由实验向汇连一条容量为<span class="math inline">\(p_k\)</span>的边, 这样,</li>
+</ul>
+<p><span class="math display">\[\sum_{E_j \in T} p_j - \sum_{I_k \in T}c_k=\sum p_j - \sum_{E_j \in S}p_j - \sum_{I_k \in T}c_k\\=\sum p_j - cap[S,T]\]</span></p>
+<h2 id="star最小路径覆盖问题">3. <span class="math inline">\(\star\)</span>最小路径覆盖问题</h2>
+<ul>
+<li><p>二分图最大匹配, 网络流</p></li>
+<li><p>给定有向图<span class="math inline">\(G=(V,E)\)</span>, 设<span class="math inline">\(P\)</span>是<span class="math inline">\(G\)</span>的一个简单路径(顶点不相交)的集合, 如果<span class="math inline">\(V\)</span>中的每个点都在<span class="math inline">\(P\)</span>的一条路径上, 那么称<span class="math inline">\(P\)</span>是原图的一个路径覆盖. <span class="math inline">\(G\)</span>的最小路径覆盖是<span class="math inline">\(G\)</span>的所含路径条数最少的路径覆盖. 求DAG<span class="math inline">\(G\)</span>的最小路径覆盖.</p></li>
+<li><p>我们考察一个路径覆盖的性质:</p></li>
+</ul>
+<p>1. 每个顶点属于且仅属于一个路径. 2. 路径上除了终点, 每个点都恰好有且仅有一条边指向路径上另一个点.</p>
+<p>可以发现这种性质类似二分图性质, 我们把点拆成两个点, 一个作为起点, 一个作为终点, 那么每一条原图中的边都对应着二分图中的一个匹配, 因为一个点仅能被一条边覆盖, 所以在二分图中每一个合法的匹配都唯一地代表了一种路径覆盖方式. 最开始的时候, 我们可以看作每个点都自身作为一个路径, 这样, 每增加一个二分图匹配, 集合的基数就减少一, 那么我们只要算出二分图的最大匹配, 用点的个数减去它就可以了.</p>
+<ul>
+<li><p>这个题目的关键就是发现潜在的二分图性质.</p></li>
+<li><p>注意, 这种建模方式仅限于DAG, 因为如果有环, 那么可能对应了一些环覆盖, 而不是路径覆盖.</p></li>
+</ul>
+<h2 id="魔术球问题">4. 魔术球问题</h2>
+<ul>
+<li>最小路径覆盖, 最大流</li>
+<li>假设有n根柱子, 按照以下规则在这n根柱子中依次放入编号为1,2,3的球, 1. 每次只能在某根柱子的最上面放球 2. 满足相邻任何一根柱子上相邻两个球的编号之和为完全平方数</li>
+<li>如果存在<span class="math inline">\(i &lt; j\)</span>使得<span class="math inline">\(i+j\)</span>是完全平方数, 连边<span class="math inline">\(i \rightarrow j\)</span></li>
+<li>那么对于有这样<span class="math inline">\(n\)</span>个顶点的图<span class="math inline">\(G\)</span>, 显然地<span class="math inline">\(G\)</span>的最小路径覆盖确定了柱子数</li>
+<li>我们可以二分答案使用上面的方法验证</li>
+<li>也可以证明, <span class="math inline">\(n\)</span>个柱子能够放入的最多球数为<span class="math inline">\(\lfloor \frac {n^2+2n-1}2 \rfloor\)</span>.(我不会证)</li>
+</ul>
+<h2 id="圆桌问题">5. 圆桌问题</h2>
+<ul>
+<li><p>最大流</p></li>
+<li><p>有<span class="math inline">\(n\)</span>个来自不同单位的代表, 每个单位的代表数分别为<span class="math inline">\(r_i\)</span>, 会议餐厅共有<span class="math inline">\(m\)</span>个餐桌, 每个餐桌可以容纳<span class="math inline">\(c_i\)</span>人, 同时同一个单位的代表不能在同一个餐桌用餐.</p></li>
+<li><p>不难建图:</p></li>
+<li><span class="math inline">\(s \xrightarrow{r_i}\)</span>单位</li>
+<li>单位<span class="math inline">\(\xrightarrow{1}\)</span>餐桌</li>
+<li><p>餐桌<span class="math inline">\(\xrightarrow{c_i}t\)</span></p></li>
+</ul>
+<p>跑一遍最大流即可</p>
+<h2 id="最长递增子序列问题">6. 最长递增子序列问题</h2>
+<ul>
+<li>最大流</li>
+<li>给定正整数序列, 求从给定的序列中最多可以取出多少个长度为<span class="math inline">\(s\)</span>的LIS.</li>
+<li>和SDOI某年一道题很相似</li>
+<li>首先如果对于<span class="math inline">\(i &lt; j, f_i &lt; f_j\)</span>连边<span class="math inline">\(i \rightarrow j\)</span></li>
+<li>然后有两种做法, 一种是拆点放限制, 一种是在边上搞, 其实都无所谓.</li>
+</ul>
+<h2 id="试题库问题">7. 试题库问题</h2>
+<ul>
+<li>最大流</li>
+<li>有<span class="math inline">\(n\)</span>道试题, 知道他们所属的类型, 求一种算法使得可以出一套有<span class="math inline">\(m\)</span>个题目的试卷包含<span class="math inline">\(k_i\)</span>个某种类型的题目.</li>
+<li>建图:</li>
+<li>s到每种类型, 容量<span class="math inline">\(k_i\)</span></li>
+<li>每个试题到t, 容量1</li>
+<li>试题到类型连边容量1</li>
+</ul>
+<h2 id="机器人路径规划问题">8. 机器人路径规划问题</h2>
+<ul>
+<li><p>未解决</p></li>
+<li>机器人在一个树上自由移动, 给定树上两点s和t, 树上有若干可移动的障碍物, 任何时刻两个物品不能在同一个节点上. 移动某个物品(机器人或障碍)的代价是1. 您需要使用最小的代价移动机器人从s到t.</li>
+<li><p>本题是一个著名的树形路径上的路径规划问题, 成为了“网络流24题”中唯一没有得到解决的问题. 事实上, 这个问题并不是一个网络流问题, 虽然有一个<span class="math inline">\(O(n^9)\)</span>的算法, 但是非常缓慢<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>, 有兴趣的同学可以参考文献[6].</p></li>
+</ul>
+<h2 id="方格取数问题">9. 方格取数问题</h2>
+<ul>
+<li><p>最大流, 拆点, 二分图最大独立集</p></li>
+<li><p>在一个<span class="math inline">\(m \times n\)</span>的棋盘中, 每一个方格中有一个正整数, 现要从方格中取数使得取到的任意两个数不相邻, 且取出的数总和最大.</p></li>
+<li><p>一看见棋盘, 不管它问什么, 我们就要先黑白染色<del>(笑)</del>. 这样, 显然格子组成了一个二分图, 然后将每个方格节点按照方格中的正整数<span class="math inline">\(x\)</span>拆成<span class="math inline">\(x\)</span>个顶点. 原来链接方格顶点<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>的边增加为<span class="math inline">\(x \times y\)</span>条边. 由此构成的图<span class="math inline">\(G&#39;\)</span>仍然是二分图. 这样就等价于求二分图的最大独立集.</p></li>
+<li><p>对于图, 我们有:</p></li>
+<li><p>最大独立集 + 最小顶点覆盖 = V</p></li>
+</ul>
+<p>对于二分图, 我们有:</p>
+<ul>
+<li><p>最小顶点覆盖 = 最大匹配<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a><a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a></p></li>
+<li><p>所以我们跑一遍Dinic就解决了本题.</p></li>
+</ul>
+<h2 id="star餐巾计划问题">10. <span class="math inline">\(\star\)</span>餐巾计划问题</h2>
+<ul>
+<li><p>最小费用流, 拆点, 决策分析</p></li>
+<li><p>一个餐厅在连续的<span class="math inline">\(N\)</span>天中, 每天需要使用的餐巾个数不尽相同. 餐厅每天有三种决策:</p></li>
+<li>买一块新餐巾, 代价p</li>
+<li>旧餐巾送到快洗店, m天后使用, 代价f</li>
+<li><p>旧餐巾送到慢洗店, n天后使用, 代价s</p></li>
+</ul>
+<p>设计一个计划使得总花费最小.</p>
+<ul>
+<li><p>构造网络<span class="math inline">\(G\)</span>, 每天对应图<span class="math inline">\(G\)</span>的两个顶点<span class="math inline">\(X_i\)</span>和<span class="math inline">\(Y_i\)</span>.<span class="math inline">\(X_i\)</span>表示干净, <span class="math inline">\(Y_i\)</span>表示脏.</p></li>
+<li>顶点<span class="math inline">\(X_i\)</span>和<span class="math inline">\(X_{i+1}\)</span>连一条容量为<span class="math inline">\(\infty\)</span>, 费用为<span class="math inline">\(0\)</span>的边, 表示保留旧餐巾的决策.</li>
+<li>当<span class="math inline">\(i+m \leqslant N\)</span>时, 顶点<span class="math inline">\(X_i\)</span>和<span class="math inline">\(Y_{i+m}\)</span>连一条容量为<span class="math inline">\(\infty\)</span>, 费用为<span class="math inline">\(f\)</span>的边, 表示快洗决策.</li>
+<li><p>当<span class="math inline">\(i+n \leqslant N\)</span>时, 顶点<span class="math inline">\(X_i\)</span>和<span class="math inline">\(Y_{i+m}\)</span>连一条容量为<span class="math inline">\(\infty\)</span>, 费用为<span class="math inline">\(s\)</span>的边, 表示慢洗决策.</p></li>
+</ul>
+<p>另外增加源<span class="math inline">\(s\)</span>和汇<span class="math inline">\(t\)</span>, 以及附加顶点<span class="math inline">\(k\)</span></p>
+<ul>
+<li>从s向每个顶点<span class="math inline">\(X_i\)</span>连一条边, 容量为第i天餐巾需求量<span class="math inline">\(r_i\)</span>, 费用0.</li>
+<li>从附加顶点<span class="math inline">\(k\)</span>向每个顶点<span class="math inline">\(Y_i\)</span>连一条容量为<span class="math inline">\(\infty\)</span>, 费用为<span class="math inline">\(p\)</span>, 表示购买决策.</li>
+<li><p>从顶点<span class="math inline">\(Y_i\)</span>向<span class="math inline">\(t\)</span>连一条容量为<span class="math inline">\(r_i\)</span>, 费用为0.</p></li>
+<li><p>求网络<span class="math inline">\(G\)</span>的最小网络流.</p></li>
+</ul>
+<h2 id="航空路线问题">11. 航空路线问题</h2>
+<ul>
+<li>拆点, 费用流</li>
+<li>给定一个带边权有向图, 求一条从<span class="math inline">\(s\)</span>到<span class="math inline">\(t\)</span>又从<span class="math inline">\(t\)</span>到<span class="math inline">\(s\)</span>的路径使得:</li>
+<li>每个点只经过一次</li>
+<li>每条边只经过一次</li>
+<li>总权最大</li>
+<li>这种每个点只能经过一次的显然要拆点建最大流模型, 又因為有边权的设定, 所以我们跑一个最大费用最大流就好了.</li>
+</ul>
+<h2 id="软件补丁问题">12. 软件补丁问题</h2>
+<ul>
+<li><p>最小转移代价, 最短路</p></li>
+<li><p>某软件有<span class="math inline">\(n\)</span>个bug, <span class="math inline">\(m\)</span>个补丁, 每一种补丁都有两个与之对应的bug集合<span class="math inline">\(B_1[i]\)</span>和<span class="math inline">\(B_2[i]\)</span>, 设当前bug集合为<span class="math inline">\(S\)</span>, 补丁<span class="math inline">\(i\)</span>可以发挥作用当且仅当</p></li>
+</ul>
+<p><span class="math display">\[S \cup B_1[i] = S \ and\ S \cap B_2[i] = \varnothing \]</span></p>
+<p>每个补丁可以修复的bug集合为<span class="math inline">\(F_1[i]\)</span>, 会带来的新bug集合为<span class="math inline">\(F_2[i]\)</span>, 另外, 每个补丁修复都需要一定的时间. 试设计一个算法, 利用<span class="math inline">\(m\)</span>个补丁把原程序修复成一个没有bug的软件, 并且使得总时间最小.</p>
+<ul>
+<li>参考文献<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a>中说这道题可以使用网络流解决, 但在我看来不如使用在隐式图中spfa解决, 具体的, 我们把状态压缩成一个二进制串, 用一个节点表示集合, 这样状态的转移对应了图中的边, 跑一遍spfa就可以解决了.</li>
+</ul>
+<h2 id="星际转移问题">13. 星际转移问题</h2>
+<ul>
+<li><p>最大流, 拆点, 利用之前增广结果</p></li>
+<li>给定一个有向图, 图上的边周期性开放, 边有费用和容量, 现在求最小代价从<span class="math inline">\(s\)</span>转移所有人到<span class="math inline">\(t\)</span>.</li>
+<li>首先考察原问题的反问题: 给定时间<span class="math inline">\(T\)</span>, 最多可以运送多少人?</li>
+<li>我们把一个点拆成<span class="math inline">\(T\)</span>个点建图, 如果有一条边<span class="math inline">\((i,j)\)</span>, 那么新图中有一条边<span class="math inline">\((i, t) \xrightarrow{c(i,j)} (j, t+1)\)</span>, 同时, 又有边<span class="math inline">\((i,t) \xrightarrow{\infty} (i,t+1)\)</span>, 那么跑一下最大流就好了.</li>
+<li><p>然后考察两种方法: 一种是二分时间<span class="math inline">\(T\)</span>, 一种是从小到大枚举<span class="math inline">\(T\)</span>. 看似二分好一些, 但是第二种方法可以利用之前的结果进行增广, 反而效率会高.</p></li>
+</ul>
+<h2 id="孤岛营救问题">14. 孤岛营救问题</h2>
+<ul>
+<li>分层图最短路</li>
+<li>题目与黑书<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a>上的第61页的题目相同, 来自CTSC 1999</li>
+<li>建分层图跑一遍spfa就好了.</li>
+</ul>
+<h2 id="汽车加油行驶问题">15. 汽车加油行驶问题</h2>
+<ul>
+<li>分层图最短路</li>
+<li>设状态为<span class="math inline">\((x,y,z)\)</span>, 以状态为点, 各种决策为边建图, 跑spfa即可.</li>
+</ul>
+<h2 id="数字梯形问题">16. 数字梯形问题</h2>
+<ul>
+<li><p>费用流</p></li>
+<li>给定一个由n 行数字组成的数字梯形如下图所示。梯形的第一行有m 个数字。从梯形的顶部的m 个数字开始，在每个数字处可以沿左下或右下方向移动，形成一条从梯形的顶至底的路径。</li>
+<li>规则一: 互不相交: 拆点费用流</li>
+<li>规则二: 仅在数字处相交: 限制边, 费用流</li>
+<li><p>规则三: 允许在数字处相交或边相交: DP</p></li>
+</ul>
+<h2 id="运输问题">17. 运输问题</h2>
+<ul>
+<li>费用流</li>
+<li>W 公司有m个仓库和n 个零售商店。第i 个仓库有ai个单位的货物；第j 个零售商店需要bj个单位的货物。货物供需平衡，即ai的和=bj的和。从第i 个仓库运送每单位货物到第j个零售商店的费用为cij。试设计一个将仓库中所有货物运送到零售商店的运输方案， 使总运输费用最少。</li>
+<li>源连仓库流量ai费用0，商店连汇流量bj费用0，每个仓库连每个商店流量无限大费用cij，跑网络流.</li>
+</ul>
+<h2 id="分配工作问题">18. 分配工作问题</h2>
+<ul>
+<li>有n件工作要分配给n个人做。第i 个人做第j 件工作产生的效益为cij 。试设计一个将n件工作分配给n个人做的分配方案，使产生的总效益最大。</li>
+<li>二分图最大权匹配, KM算法.</li>
+</ul>
+<h2 id="负载平衡问题">19. 负载平衡问题</h2>
+<ul>
+<li>G公司有<span class="math inline">\(n\)</span>个环形排列的仓库, 每个仓库存储的货物数量不相等, 如何使用最少搬运量可以使<span class="math inline">\(n\)</span>个仓库库存数量相同.只能在相邻仓库之间搬运</li>
+<li>不难发现任意两个仓库之间都可以视为直接搬运. 那么每个仓库的目标就是<span class="math inline">\(\frac{\sum x_i}n\)</span>. 跑费用流就好了.</li>
+</ul>
+<h2 id="深海机器人问题">20. 深海机器人问题</h2>
+<ul>
+<li>给定每个深海机器人的出发位置和目标位置, 以及每条边上生物标本的价值, 计算深海机器人们的最有移动方案使得深海机器人到达目的地后采集到的标本价值最高.</li>
+<li>把一条边拆成两条边, 第一条边容量为1, 费用为<span class="math inline">\(c_i\)</span>, 第二条边容量为<span class="math inline">\(\infty\)</span>, 费用为0. 建超级源汇, 跑最大费用最大流.</li>
+</ul>
+<h2 id="star最长k可重区间集问题">21. <span class="math inline">\(\star\)</span>最长<span class="math inline">\(k\)</span>可重区间集问题</h2>
+<ul>
+<li><p>最大费用流, 最大权不相交路径</p></li>
+<li><p>给定实直线<span class="math inline">\(L\)</span>上<span class="math inline">\(n\)</span>个开区间组成的集合<span class="math inline">\(I\)</span>和一个正整数<span class="math inline">\(k\)</span>, 试设计一个算法, 从<span class="math inline">\(I\)</span>中选出<span class="math inline">\(S \subseteq I\)</span>, 使得在实直线上的任意一点<span class="math inline">\(x\)</span>, S中包含点<span class="math inline">\(x\)</span>的开区间个数不超过<span class="math inline">\(k\)</span>, 且<span class="math inline">\(\sum_{z \in S}|z|\)</span>达到最大, 这样的集合<span class="math inline">\(S\)</span>称为开区间集合<span class="math inline">\(I\)</span>的最长<span class="math inline">\(k\)</span>可重区间集. <span class="math inline">\(\sum_{z \in S}|z|\)</span>称为最长<span class="math inline">\(k\)</span>可重区间集的长度.</p></li>
+<li><p>若把每个线段看做点，一组不相交的线段集合就可以看做路径。这样问题就转化为选k条路径使得权值和最大，并且路径不能重叠（一个线段只能选一次）。</p></li>
+<li><p>设给定的开区间集合共有<span class="math inline">\(m\)</span>个不同的端点. 将这<span class="math inline">\(m\)</span>个端点从小到大排序为: <span class="math inline">\(x_1, x_2, \cdots, x_m\)</span>, 构造网络<span class="math inline">\(G=(V,E)\)</span>如下:</p></li>
+<li>每个端点<span class="math inline">\(x_i\)</span>对应一个顶点, 新增源<span class="math inline">\(s\)</span>和汇<span class="math inline">\(t\)</span>.</li>
+<li>对于每一个区间<span class="math inline">\((x_i, x_j)\)</span>, 连边<span class="math inline">\(x_i \xrightarrow {1, x_j-x_i} x_j\)</span>.</li>
+<li>每对顶点<span class="math inline">\((x_i, x_{i+1})\)</span>若没有边, 则增加一条有向边, 容量为<span class="math inline">\(k\)</span>, 费用为<span class="math inline">\(0\)</span>.</li>
+<li><p><span class="math inline">\(s \xrightarrow{k, 0} x_1\)</span>和<span class="math inline">\(x_m \xrightarrow{k,0} t\)</span>.</p></li>
+</ul>
+<p>求网络的最大费用流.</p>
+<ul>
+<li>转换思路：端点为点。同样是限制流量。而这次目标针对了【每个点至多出现k次】，而区间则成了一段有价值的点，所以可以端点之间连边来表示。并且这个做法边数更少，更优。</li>
+</ul>
+<h2 id="最长k可重线段集问题">22. 最长<span class="math inline">\(k\)</span>可重线段集问题</h2>
+<ul>
+<li>基本同21</li>
+</ul>
+<h2 id="火星探险问题">23. 火星探险问题</h2>
+<ul>
+<li>用一个P*Q 网格表示登陆舱与传送器之间的位置。登陆舱的位置在(X1,Y1)处，传送器的位置在(XP ,YQ)处。登陆舱着陆后，探测车将离开登陆舱向先期到达的传送器方向移动。探测车在移动中还必须采集岩石标本。每一块岩石标本由最先遇到它的探测车完成采集。每块岩石标本只能被采集一次。岩石标本被采集后，其他探测车可以从原来岩石标本所在处通过。探测车不能通过有障碍的地面。本题限定探测车只能从登陆处沿着向南或向东的方向朝传送器移动，而且多个探测车可以在同一时间占据同一位置。如果某个探测车在到达传送器以前不能继续前进，则该车所采集的岩石标本将全部损失.给定每个位置的状态，计算探测车的最优移动方案，使到达传送器的探测车的数量最多，而且探测车采集到的岩石标本的数量最多。</li>
+<li>把每个位置拆成两个点:</li>
+<li>对于原图中的边, 连<span class="math inline">\(i&#39; \xrightarrow{\infty ,0} j\)</span></li>
+<li>对于岩石顶点, 连<span class="math inline">\(i \xrightarrow{1,1}i&#39;\)</span></li>
+<li>对于每个非障碍顶点, 连<span class="math inline">\(i \xrightarrow{\infty, 0} i&#39;\)</span>.</li>
+<li><span class="math inline">\(s \rightarrow\)</span>登陆舱, 容量探测车数, 费用0, 传送器<span class="math inline">\(\rightarrow t\)</span>, 容量探测车数, 费用0</li>
+<li>最大费用最大流</li>
+</ul>
+<h2 id="骑士共存问题">24. 骑士共存问题</h2>
+<ul>
+<li>二分图最大独立集</li>
+<li>象棋棋盘上有障碍, 最多能放置多少马使得他们之间不相互攻击.</li>
+<li>二分图染色, 最大独立集.</li>
+</ul>
+<p><span class="math inline">\(\mathtt{COPYRIGHT}© \mathtt{2017,KONJAC,MIT\ LICENSE}\)</span></p>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>计算机设计与分析, 王晓东, 第三版<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>计算机设计与分析-习题解答, 王晓东, 第三版<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p><a href="http://blog.csdn.net/orzgeotcbrl/article/details/50808548" target="_blank" rel="external">自写网络流24题总结</a>, orzGEOTCBRL<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p><a href="hzwer.com">黄学长的博客</a>, hzwer<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p><a href="https://www.byvoid.com/zht/blog/lpf24-solution" target="_blank" rel="external">線性規劃與網絡流24題 解題報告</a>, BYVoid<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>机器人路径规划问题(TMP1R)题解, 陈俊锟<a href="#fnref6">↩</a></p></li>
+<li id="fn7"><p>浅谈线性规划与对偶问题, 董克凡<a href="#fnref7">↩</a></p></li>
+<li id="fn8"><p>最小割模型在信息学竞赛中的应用, 胡伯涛<a href="#fnref8">↩</a></p></li>
+<li id="fn9"><p>计算机设计与分析-习题解答, 王晓东, 第三版<a href="#fnref9">↩</a></p></li>
+<li id="fn10"><p>算法设计与信息学竞赛, 刘汝佳, 黄亮<a href="#fnref10">↩</a></p></li>
+</ol>
+</div>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/22/bzoj4569-SCOI2016-萌萌哒-并查集-倍增/" rel="next" title="[bzoj4569][SCOI2016]萌萌哒-并查集+倍增">
+                <i class="fa fa-chevron-left"></i> [bzoj4569][SCOI2016]萌萌哒-并查集+倍增
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/23/bzoj4567-Scoi2016-背单词-Trie-贪心-模型转化/" rel="prev" title="[bzoj4567][Scoi2016]背单词-Trie+贪心+模型转化">
+                [bzoj4567][Scoi2016]背单词-Trie+贪心+模型转化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yNzk0Ni80NTIz"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars2.githubusercontent.com/u/8966584?v=3&s=460"
+               alt="Geng Chen" />
+          <p class="site-author-name" itemprop="name">Geng Chen</p>
+           
+              <p class="site-description motion-element" itemprop="description">problems, notes and solutions</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">174</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">95</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/MrMorning" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/geng-chen-51/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-wheelchair"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+<script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+<div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div id="myCanvasContainer" class="widget tagcloud">
+        <canvas width="250" height="250" id="resCanvas" style="width=100%">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2-SAT/">2-SAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AC自动机/">AC自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BSGS/">BSGS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CDQ分治/">CDQ分治</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/">FFT</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/KMP/">KMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Manacher/">Manacher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NTT/">NTT</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Polya定理/">Polya定理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Prufer编码/">Prufer编码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/STL/">STL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Trie/">Trie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfs序列/">dfs序列</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lca/">lca</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lct/">lct</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spfa/">spfa</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/splay/">splay</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上下界网络流/">上下界网络流</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/主席树/">主席树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱搞/">乱搞</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分/">二分</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/二分图/">二分图</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代价提前计算/">代价提前计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/倍增/">倍增</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/凸包/">凸包</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分块/">分块</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分层图/">分层图</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分数规划/">分数规划</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态点分治/">动态点分治</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态规划/">动态规划</a><span class="tag-list-count">19</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单调栈/">单调栈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博弈论/">博弈论</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原根/">原根</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀数组/">后缀数组</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后缀自动机/">后缀自动机</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/图论/">图论</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多项式/">多项式</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/好题/">好题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字典序/">字典序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串哈希/">字符串哈希</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/容斥原理/">容斥原理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/平面图/">平面图</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并查集/">并查集</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/广义后缀自动机/">广义后缀自动机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/强连通分量/">强连通分量</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/拆点/">拆点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/括号序列/">括号序列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索/">搜索</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/摸鱼/">摸鱼</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数位DP/">数位DP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学知识/">数学知识</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">37</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数论/">数论</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/斜率优化/">斜率优化</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最大流/">最大流</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/最小割/">最小割</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/权值线段树/">权值线段树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/李超线段树/">李超线段树</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树上倍增/">树上倍增</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树套树/">树套树</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形DP/">树形DP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树形dp/">树形dp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树状数组/">树状数组</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树链剖分/">树链剖分</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模型转化/">模型转化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模板/">模板</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/欧拉函数/">欧拉函数</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点分治/">点分治</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/特殊数列/">特殊数列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状压DP/">状压DP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生成函数/">生成函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生成树/">生成树</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/生成树计数/">生成树计数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/矩阵乘法/">矩阵乘法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/矩阵树定理/">矩阵树定理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离散对数/">离散对数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/离线处理/">离线处理</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线性规划/">线性规划</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/线段树/">线段树</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组合数学/">组合数学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/结论题/">结论题</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络流/">网络流</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/莫队算法/">莫队算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/蒟蒻/">蒟蒻</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负环/">负环</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/贪心/">贪心</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/费用流/">费用流</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/退流/">退流</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/递归/">递归</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高斯消元/">高斯消元</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高精度/">高精度</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/默比乌斯反演/">默比乌斯反演</a><span class="tag-list-count">2</span></li></ul>
+        </canvas>
+    </div>
+</div>
+
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              无限ym的神犇们Orz
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/candy99" title="Candy?" target="_blank">Candy?</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://worldframe.top" title="冯硕" target="_blank">冯硕</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.csdn.net/orzgeotcbrl" title="orzGEOTCBRL" target="_blank">orzGEOTCBRL</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/lidaxin" title="hahalidaxin" target="_blank">hahalidaxin</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/y-clever/" title="SDOI最强-IOI AK爷-rqy" target="_blank">SDOI最强-IOI AK爷-rqy</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sforest.in/" title="约修亚_RK" target="_blank">约修亚_RK</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://mby.pw/" title="mby" target="_blank">mby</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/huibixiaoxing/" title="嘒彼小星" target="_blank">嘒彼小星</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/zhenghaotian" title="zht" target="_blank">zht</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#飞行员配对方案问题"><span class="nav-number">1.</span> <span class="nav-text">1. 飞行员配对方案问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#太空飞行计划问题"><span class="nav-number">2.</span> <span class="nav-text">2. 太空飞行计划问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#star最小路径覆盖问题"><span class="nav-number">3.</span> <span class="nav-text">3. \(\star\)最小路径覆盖问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#魔术球问题"><span class="nav-number">4.</span> <span class="nav-text">4. 魔术球问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#圆桌问题"><span class="nav-number">5.</span> <span class="nav-text">5. 圆桌问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长递增子序列问题"><span class="nav-number">6.</span> <span class="nav-text">6. 最长递增子序列问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#试题库问题"><span class="nav-number">7.</span> <span class="nav-text">7. 试题库问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#机器人路径规划问题"><span class="nav-number">8.</span> <span class="nav-text">8. 机器人路径规划问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方格取数问题"><span class="nav-number">9.</span> <span class="nav-text">9. 方格取数问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#star餐巾计划问题"><span class="nav-number">10.</span> <span class="nav-text">10. \(\star\)餐巾计划问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#航空路线问题"><span class="nav-number">11.</span> <span class="nav-text">11. 航空路线问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件补丁问题"><span class="nav-number">12.</span> <span class="nav-text">12. 软件补丁问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#星际转移问题"><span class="nav-number">13.</span> <span class="nav-text">13. 星际转移问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#孤岛营救问题"><span class="nav-number">14.</span> <span class="nav-text">14. 孤岛营救问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#汽车加油行驶问题"><span class="nav-number">15.</span> <span class="nav-text">15. 汽车加油行驶问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字梯形问题"><span class="nav-number">16.</span> <span class="nav-text">16. 数字梯形问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运输问题"><span class="nav-number">17.</span> <span class="nav-text">17. 运输问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配工作问题"><span class="nav-number">18.</span> <span class="nav-text">18. 分配工作问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载平衡问题"><span class="nav-number">19.</span> <span class="nav-text">19. 负载平衡问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#深海机器人问题"><span class="nav-number">20.</span> <span class="nav-text">20. 深海机器人问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#star最长k可重区间集问题"><span class="nav-number">21.</span> <span class="nav-text">21. \(\star\)最长\(k\)可重区间集问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长k可重线段集问题"><span class="nav-number">22.</span> <span class="nav-text">22. 最长\(k\)可重线段集问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#火星探险问题"><span class="nav-number">23.</span> <span class="nav-text">23. 火星探险问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#骑士共存问题"><span class="nav-number">24.</span> <span class="nav-text">24. 骑士共存问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+          </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Geng Chen</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+  
+
+</body>
+</html>
