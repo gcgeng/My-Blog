@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://mrmorning.github.io/categories/index.html</loc>
+    
+    <lastmod>2017-04-21T11:38:33.951Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2017/04/01/bzoj3963/</loc>
+    
+    <lastmod>2017-04-21T09:52:26.975Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2017/04/01/bzoj4625/</loc>
+    
+    <lastmod>2017-04-21T08:50:11.145Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/template/Notice.html</loc>
+    
+    <lastmod>2017-04-20T12:58:12.718Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://mrmorning.github.io/template/index.html</loc>
     
     <lastmod>2017-04-20T11:58:00.802Z</lastmod>
@@ -16,30 +44,9 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/template/Notice.html</loc>
-    
-    <lastmod>2017-04-20T11:40:47.430Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://mrmorning.github.io/2017/04/19/install-qq/</loc>
     
     <lastmod>2017-04-19T12:53:09.541Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2017/04/01/bzoj4625/</loc>
-    
-    <lastmod>2017-04-01T09:31:43.235Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2017/04/01/bzoj3963/</loc>
-    
-    <lastmod>2017-04-01T03:52:18.171Z</lastmod>
     
   </url>
   
@@ -891,76 +898,6 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/11/13/P1311-%E9%80%89%E6%8B%A9%E5%AE%A2%E6%A0%88/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/11/13/P1079-Vigenere-%E5%AF%86%E7%A0%81/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/11/11/P1083-%E5%80%9F%E6%95%99%E5%AE%A4/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2017/02/03/Codeforces-Round-395-Div-2-%E9%A2%98%E8%A7%A3/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/11/02/P1090-%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2017/01/21/bzoj1875-SDOI2009-HH%E5%8E%BB%E6%95%A3%E6%AD%A5-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/11/14/P1073-%E6%9C%80%E4%BC%98%E8%B4%B8%E6%98%93/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/11/16/P1041-%E4%BC%A0%E6%9F%93%E7%97%85%E6%8E%A7%E5%88%B6/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/11/03/P1091-%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/11/13/P1038-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://mrmorning.github.io/2016/12/11/ZJOI2008-%E6%A0%91%E7%9A%84%E7%BB%9F%E8%AE%A1%E2%80%94%E2%80%94%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
@@ -969,13 +906,6 @@
   
   <url>
     <loc>http://mrmorning.github.io/2016/12/25/UVa-1619-Feel-Good/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/10/29/P1003-%E9%93%BA%E5%9C%B0%E6%AF%AF/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
@@ -1003,6 +933,13 @@
   </url>
   
   <url>
+    <loc>http://mrmorning.github.io/2016/10/29/P2409-Y%E7%9A%84%E7%A7%AF%E6%9C%A8/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://mrmorning.github.io/2016/11/15/P1967-%E8%B4%A7%E8%BD%A6%E8%BF%90%E8%BE%93-60%E5%88%86/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
@@ -1018,13 +955,6 @@
   
   <url>
     <loc>http://mrmorning.github.io/2016/11/15/P1941-%E9%A3%9E%E6%89%AC%E7%9A%84%E5%B0%8F%E9%B8%9F/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/11/07/P1541-%E4%B9%8C%E9%BE%9F%E6%A3%8B/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
@@ -1073,14 +1003,7 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/10/29/P1032-%E5%AD%97%E4%B8%B2%E5%8F%98%E6%8D%A2/</loc>
-    
-    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://mrmorning.github.io/2016/10/29/P1092-%E8%99%AB%E9%A3%9F%E7%AE%97-NOIP2002/</loc>
+    <loc>http://mrmorning.github.io/2016/11/13/P1311-%E9%80%89%E6%8B%A9%E5%AE%A2%E6%A0%88/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
@@ -1094,35 +1017,63 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/11/15/P1026-%E7%BB%9F%E8%AE%A1%E5%8D%95%E8%AF%8D%E4%B8%AA%E6%95%B0/</loc>
+    <loc>http://mrmorning.github.io/2016/11/16/P1220-%E5%85%B3%E8%B7%AF%E7%81%AF/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2017/02/01/hdu1695-GCD-%E2%80%94%E2%80%94%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0-%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</loc>
+    <loc>http://mrmorning.github.io/2016/11/03/P1149-%E7%81%AB%E6%9F%B4%E6%A3%92%E7%AD%89%E5%BC%8F/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/11/07/P1018-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/</loc>
+    <loc>http://mrmorning.github.io/2016/10/29/P1092-%E8%99%AB%E9%A3%9F%E7%AE%97-NOIP2002/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2017/02/01/poj2356-Find-a-multiple-%E2%80%94%E2%80%94%E9%B8%BD%E5%B7%A2%E5%8E%9F%E7%90%86/</loc>
+    <loc>http://mrmorning.github.io/2016/11/13/P1079-Vigenere-%E5%AF%86%E7%A0%81/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2017/01/04/uva12170-Easy-Climb/</loc>
+    <loc>http://mrmorning.github.io/2016/11/03/P1091-%E5%90%88%E5%94%B1%E9%98%9F%E5%BD%A2/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2016/11/02/P1090-%E5%90%88%E5%B9%B6%E6%9E%9C%E5%AD%90/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2016/11/11/P1083-%E5%80%9F%E6%95%99%E5%AE%A4/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2016/11/16/P1074-%E9%9D%B6%E5%BD%A2%E6%95%B0%E7%8B%AC-40/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2016/11/14/P1073-%E6%9C%80%E4%BC%98%E8%B4%B8%E6%98%93/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
@@ -1136,7 +1087,35 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/11/03/P1010-%E5%B9%82%E6%AC%A1%E6%96%B9/</loc>
+    <loc>http://mrmorning.github.io/2016/11/16/P1041-%E4%BC%A0%E6%9F%93%E7%97%85%E6%8E%A7%E5%88%B6/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2016/11/13/P1038-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2017/02/01/hdu1695-GCD-%E2%80%94%E2%80%94%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0-%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2017/02/01/poj2356-Find-a-multiple-%E2%80%94%E2%80%94%E9%B8%BD%E5%B7%A2%E5%8E%9F%E7%90%86/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2016/11/07/P1018-%E4%B9%98%E7%A7%AF%E6%9C%80%E5%A4%A7/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
@@ -1150,14 +1129,14 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2017/02/09/%E6%91%B8%E9%B1%BC-2017%E8%8B%B1%E6%89%8D%E8%AE%A1%E5%88%92%E5%86%AC%E4%BB%A4%E8%90%A5%E6%B8%B8%E8%AE%B0-%E5%B7%A5%E5%9D%8A%E4%B8%80%E9%A2%98%E8%A7%A3/</loc>
+    <loc>http://mrmorning.github.io/2017/01/04/uva12170-Easy-Climb/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2017/01/18/%E6%91%B8%E9%B1%BC-%E5%85%A5%E6%89%8B%E4%BA%86%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/</loc>
+    <loc>http://mrmorning.github.io/2017/01/21/bzoj1875-SDOI2009-HH%E5%8E%BB%E6%95%A3%E6%AD%A5-%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
@@ -1185,6 +1164,20 @@
   </url>
   
   <url>
+    <loc>http://mrmorning.github.io/2017/02/09/%E6%91%B8%E9%B1%BC-2017%E8%8B%B1%E6%89%8D%E8%AE%A1%E5%88%92%E5%86%AC%E4%BB%A4%E8%90%A5%E6%B8%B8%E8%AE%B0-%E5%B7%A5%E5%9D%8A%E4%B8%80%E9%A2%98%E8%A7%A3/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2017/01/18/%E6%91%B8%E9%B1%BC-%E5%85%A5%E6%89%8B%E4%BA%86%E6%9C%BA%E6%A2%B0%E9%94%AE%E7%9B%98/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://mrmorning.github.io/2016/12/02/%E6%A8%A1%E6%9D%BF-%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
@@ -1199,21 +1192,21 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/11/16/P1074-%E9%9D%B6%E5%BD%A2%E6%95%B0%E7%8B%AC-40/</loc>
+    <loc>http://mrmorning.github.io/2016/10/29/P1032-%E5%AD%97%E4%B8%B2%E5%8F%98%E6%8D%A2/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/10/29/P2409-Y%E7%9A%84%E7%A7%AF%E6%9C%A8/</loc>
+    <loc>http://mrmorning.github.io/2016/11/15/P1026-%E7%BB%9F%E8%AE%A1%E5%8D%95%E8%AF%8D%E4%B8%AA%E6%95%B0/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/11/01/P2661-%E4%BF%A1%E6%81%AF%E4%BC%A0%E9%80%92-TODO-TARJAN%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://mrmorning.github.io/2016/10/29/P1003-%E9%93%BA%E5%9C%B0%E6%AF%AF/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
@@ -1227,7 +1220,14 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/11/16/P1220-%E5%85%B3%E8%B7%AF%E7%81%AF/</loc>
+    <loc>http://mrmorning.github.io/2016/11/01/P2661-%E4%BF%A1%E6%81%AF%E4%BC%A0%E9%80%92-TODO-TARJAN%E7%AE%97%E6%B3%95/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2016/11/07/P1541-%E4%B9%8C%E9%BE%9F%E6%A3%8B/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
@@ -1241,7 +1241,14 @@
   </url>
   
   <url>
-    <loc>http://mrmorning.github.io/2016/11/03/P1149-%E7%81%AB%E6%9F%B4%E6%A3%92%E7%AD%89%E5%BC%8F/</loc>
+    <loc>http://mrmorning.github.io/2016/11/03/P1010-%E5%B9%82%E6%AC%A1%E6%96%B9/</loc>
+    
+    <lastmod>2017-03-27T00:40:11.968Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://mrmorning.github.io/2017/02/03/Codeforces-Round-395-Div-2-%E9%A2%98%E8%A7%A3/</loc>
     
     <lastmod>2017-03-27T00:40:11.968Z</lastmod>
     
