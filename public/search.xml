@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[[bzoj2501][usaco2010 Oct]Soda Machine-扫描/线段树]]></title>
+      <url>%2F2017%2F04%2F22%2Fbzoj2501%2F</url>
+      <content type="text"><![CDATA[Brief Description 给定一些区间, 找到一个点覆盖最多区间. Algorithm Design 开始就想错了方向, 一直在想贪心做法. 方法一 线段树 最脑残的想法, 但是对于我来说还是很难. 具体地来说就是先离散化, 然后建一棵支持区间加和区间取\(\max\)的线段树就好了. 然后也可以用树状数组. 我没有写这种方法, 因为有更好的办法. 方法二 rqy大佬的做法 把每个区间视为一个事件, 左端点+1, 右端点-1. 我真是sb啊. Code 123456789101112131415161718192021222324252627282930#include &lt;algorithm&gt;#include &lt;cstdio&gt;const int maxn = 50010;struct event &#123; int pos, val; bool operator&lt;(const event b) const &#123; return this-&gt;pos == b.pos ? this-&gt;val &gt; b.val : this-&gt;pos &lt; b.pos; &#125; event() &#123;&#125; event(int x, int y) : pos(x), val(y) &#123;&#125;&#125; q[maxn &lt;&lt; 1];int n, ans, tmp, cnt;int main() &#123;#ifndef ONLINE_JUDGE freopen("input", "r", stdin);#endif scanf("%d", &amp;n); for (int i = 1; i &lt;= n; i++) &#123; int a, b; scanf("%d %d", &amp;a, &amp;b); q[++cnt] = event(a, 1); q[++cnt] = event(b, -1); &#125; std::sort(q + 1, q + 1 + cnt); for (int i = 1; i &lt;= cnt; i++) &#123; tmp += q[i].val; ans = std::max(ans, tmp); &#125; printf("%d\n", ans);&#125;]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[单调队列学习笔记]]></title>
       <url>%2F2017%2F04%2F21%2F%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97%2F</url>
       <content type="text"><![CDATA[概述 队列是一种\(FIFO\)的数据结构, 这种结构适合维护序列问题. 一般来说, 单调队列都要取维护元素的位置和权值. 单调队列中的元素的权值满足单调性. 单调队列解决滑动窗口问题. 首先看这样一个例题. 例11 给定\(n\)个元素的数列\(a_i\). \(m\)个询问, 每个询问形如\(l_i, r_i\), 你需要回答\(\min_{i=l_i}^{r_i}\), 不强制在线. \(n \leqslant 10000000, m \leqslant 100000\). 考察这样的算法: 排序询问, 左端点为第一关键字, 右端点为第二关键字. 建立单调增队列维护序列最小值. 对于每一个右端点, 首先维护单调性. 然后从左边出队列, 以维护询问. 上面的算法用到了这个问题的两个性质: 可以使用离线算法, 我们就可以排序询问后枚举右端点, 然后弹出左端点以维护询问, 这样就是一个类似滑动窗口的过程. 右端点单调递增伴随着左端点单调递增. 从上面的例题中, 我们知道了单调队列在滑动窗口中的作用: 维护最小值. 考察一般情况. 滑动窗口问题指的是这样的一类问题. 第一类问题是给定一个序列, 求一个满足XX性质的最长子序列. 第二类问题是给定一个序列和一系列询问, 求出每个询问的最大值/最小值. 朴素的算法解决滑动窗口问题通常是\(\mathcal{O}(n^3)\)甚至更高的, 我们可以利用问题的特殊性质使用单调队列优化. 定义: 右端点为\(i\), 满足条件的左端点集合为\(f(i)\), 左端点\(k\)是否满足记作\(g_i(k)\). 性质1: 对于\(\forall i &lt; j\), \(f(j) \subset f(i)\). 性质2: 对于确定的右端点\(i\), \(g_i(k)\)是单调递增的. 上面的性质可以简单的理解为: 推论1: 当右端点递增时, 左端点也递增. 对于这种滑动窗口问题, 我们可以设计出这样的算法. 算法1: 维护左端点指针left, 单调队列q, 枚举右端点. 首先维护单调性(队尾)并把新的点插入. 然后根据单调队列检查性质, 如果不满足性质就右移left指针, 同时在队首弹出位置在left之前的元素. 可以知道这时的left就是右端点对应的最优左端点. 我们看一个例题. 例二2 给定一个长度为\(n\)的序列 求出一个最长的子序列, 满足\(\max - \min \leqslant m\). 看到有\(\max\), 有\(\min\), 还是这种子序列, 很容易想到滑动窗口问题, 然后这里我们需要的是维护最大值和最小值, 所以维护两个单调队列就好了. 单调队列在动态规划中的应用(斜率优化) 维护一个上凸包/下凸包, \(m\)个递增的询问, 找到与给定斜率最接近的点. 单调队列的单调性维护凸包, 每次从队首维护斜率就好了. 具体的应用可以看博客里的题目3 经典问题↩ bzoj2500↩ konjac的博客↩]]></content>
@@ -12,7 +19,7 @@
     <entry>
       <title><![CDATA[SDOI2017 Round 1爆零记+阶段性总结]]></title>
       <url>%2F2017%2F04%2F21%2Fsdoi2017%2F</url>
-      <content type="text"><![CDATA[U2FsdGVkX19kZcU0M/50TiPH2PbIkCnk3jzrYdo7mGCgYiTo8TLwAo3VNynVwMFVhbUrsRRArE0tmpQLZfDPEo1yzkzJVPuGnKuQ2Uve0UY=var pwd = window.prompt("please input password","");var txt = document.getElementById("enc_content").innerHTML;var bytes = CryptoJS.AES.decrypt(txt, pwd);var plaintext = bytes.toString(CryptoJS.enc.Utf8);document.getElementById("enc_content").innerHTML = plaintext]]></content>
+      <content type="text"><![CDATA[U2FsdGVkX19sM3WcSO28z05a+TClfT3Te4WAXrQenzD4YgA38d6+G3dBloNqblroHsduNWzU97U3b9+my/iMb7XA5MBYU4Dq/LYpFLjv1C8=var pwd = window.prompt("please input password","");var txt = document.getElementById("enc_content").innerHTML;var bytes = CryptoJS.AES.decrypt(txt, pwd);var plaintext = bytes.toString(CryptoJS.enc.Utf8);document.getElementById("enc_content").innerHTML = plaintext]]></content>
     </entry>
 
     
